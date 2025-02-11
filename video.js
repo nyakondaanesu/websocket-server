@@ -1,9 +1,14 @@
-export function videoSock(socket, usersVideo, privateRoomsVideo, Room) {
+export function videoSock(
+  socket,
+  usersVideo,
+  privateRoomsVideo,
+  Room,
+  generateUniqueId
+) {
   // Fix: Remove reference to undefined 'users' variable
   socket.on("authenticateVideo", ({ googleUserId }) => {
     if (usersVideo[googleUserId]) {
       const oldSocketId = usersVideo[googleUserId]; // Changed from users to usersVideo
-      io.sockets.sockets.get(oldSocketId)?.disconnect();
     }
     usersVideo[googleUserId] = socket.id;
   });
