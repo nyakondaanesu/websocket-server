@@ -13,6 +13,8 @@ const io = new Server(httpServer, {
 
     methods: ["GET", "POST"],
   },
+  transports: ["websocket", "polling"],
+  allowEIO3: true,
 });
 
 // Room Management
