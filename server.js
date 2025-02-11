@@ -3,11 +3,14 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 const port = process.env.PORT || 5000;
+const dev = process.env.NODE_ENV !== "production";
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "*", // Allow all origins, change to your frontend URL in production
+    origin: dev
+      ? "http://localhost:5000"
+      : "https://nextjs-chatapp-zeta.vercel.app/", // Allow all origins, change to your frontend URL in production
     methods: ["GET", "POST"],
   },
 });
