@@ -1,7 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import { videoSock } from "./video";
+import { videoSock } from "./video.js";
 
 const port = process.env.PORT || 5000;
 const dev = process.env.NODE_ENV !== "production";
