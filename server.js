@@ -8,9 +8,8 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: dev
-      ? "http://localhost:5000"
-      : "https://nextjs-chatapp-zeta.vercel.app/chat", // Allow all origins, change to your frontend URL in production
+    origin: "https://nextjs-chatapp-zeta.vercel.app", // your frontend deployed URL
+
     methods: ["GET", "POST"],
   },
 });
