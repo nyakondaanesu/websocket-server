@@ -10,7 +10,7 @@ const io = new Server(httpServer, {
   cors: {
     origin: dev
       ? "http://localhost:5000"
-      : "https://nextjs-chatapp-zeta.vercel.app/", // Allow all origins, change to your frontend URL in production
+      : "https://nextjs-chatapp-zeta.vercel.app/chat", // Allow all origins, change to your frontend URL in production
     methods: ["GET", "POST"],
   },
 });
