@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
     console.log(`✅ User authenticated: ${googleUserId}`);
   });
 
-  videoSock(socket, VideoUsers, privateRoomsVideo);
+  videoSock(socket, VideoUsers, privateRoomsVideo, Room);
 
   socket.on("joinPrivateChat", (googleUserId) => {
     let availableRoom = privateRooms.find((room) => room.users.length === 1);
