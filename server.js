@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { videoSock } from "./video";
 
 const port = process.env.PORT || 5000;
 const dev = process.env.NODE_ENV !== "production";
@@ -47,7 +48,9 @@ const generateUniqueId = () => {
 
 // Store active rooms and users
 let privateRooms = [];
+let privateRoomsVideo = [];
 let users = {}; // Maps Google User ID to Socket ID
+let VideoUsers = {};
 let profilePics = {};
 
 // WebSocket Connection Handling
@@ -68,20 +71,7 @@ io.on("connection", (socket) => {
     console.log(`✅ User authenticated: ${googleUserId}`);
   });
 
-  socket.on("offer", (offer) => {
-    console.log("📨 Offer received:", offer);
-    socket.broadcast.emit("offer", offer);
-  });
-
-  socket.on("answer", (answer) => {
-    console.log("📨 Answer received:", answer);
-    socket.broadcast.emit("answer", answer);
-  });
-
-  socket.on("ice-candidate", (candidate) => {
-    console.log("❄️ ICE Candidate received:", candidate);
-    socket.broadcast.emit("ice-candidate", candidate);
-  });
+  videoSock(socket, VideoUsers, privateRoomsVideo);
 
   socket.on("joinPrivateChat", (googleUserId) => {
     let availableRoom = privateRooms.find((room) => room.users.length === 1);
