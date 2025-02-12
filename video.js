@@ -37,6 +37,17 @@ export function videoSock(
     }
   });
 
+  socket.on("leaveVideoChatRoom", (googleUserId) => {
+    const userRoom = privateRoomsVideo.find((room) =>
+      room.users.includes(socket.id)
+    );
+    if (userRoom) {
+      socket.to(userRoom.id).emit("leaveVideoChatRoom", googleUserId);
+      userRoom.removeUser(socket.id);
+      socket.leave(userRoom.id);
+    }
+  });
+
   socket.on("offer", (offer) => {
     const userRoom = privateRoomsVideo.find((room) =>
       room.users.includes(socket.id)
