@@ -38,6 +38,7 @@ export function videoSock(
       room.users.includes(socket.id)
     );
     if (userRoom) {
+      console.log(`📡 Forwarding offer to room ${userRoom.id}`);
       socket.to(userRoom.id).emit("offer", offer);
     }
   });
@@ -47,6 +48,7 @@ export function videoSock(
       room.users.includes(socket.id)
     );
     if (userRoom) {
+      console.log(`📡 Forwarding answer to room ${userRoom.id}`);
       socket.to(userRoom.id).emit("answer", answer);
     }
   });
