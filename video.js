@@ -22,14 +22,18 @@ export function videoSock(
 
     if (availableRoom && availableRoom.addUser(socket.id)) {
       socket.join(availableRoom.id);
-      console.log(`Match found! Room: ${availableRoom.id}`);
+
+      console.log(
+        `✅ Match Found ${socket.id} joined room: ${availableRoom.id}`
+      );
       io.to(availableRoom.id).emit("videoMatchFound");
     } else {
       const newRoom = new Room(generateUniqueId());
       newRoom.addUser(socket.id);
       privateRoomsVideo.push(newRoom);
       socket.join(newRoom.id);
-      console.log(`New video room created: ${newRoom.id}`);
+
+      console.log(`🆕 ${socket.id} created new room: ${newRoom.id}`);
     }
   });
 
