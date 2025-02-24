@@ -9,7 +9,11 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://nextjs-chatapp-zeta.vercel.app", // your frontend deployed URL
+    origin: [
+      "https://nextjs-chatapp-zeta.vercel.app", // Keep this if still needed
+      "https://streamates.stream",
+      "https://www.streamates.stream", // Your new domain (www)
+    ], // your frontend deployed URL
 
     methods: ["GET", "POST"],
   },
